@@ -18,8 +18,13 @@ import org.apache.logging.log4j.Logger;
 import java.util.stream.Collectors;
 
 // The value here should match an entry in the META-INF/mods.toml file
-@Mod("PeepoMain")
+
+/* To build: Gradle -> PeepoMain -> forgegradle runs -> runClient
+ *
+ */
+@Mod("PeepoMod")
 public class PeepoMain {
+    public static String MODID = "PeepoMod";
 
     // Directly reference a log4j logger.
     private static final Logger LOGGER = LogManager.getLogger();
@@ -38,7 +43,7 @@ public class PeepoMain {
 
     private void setup(final FMLCommonSetupEvent event) {
         // some preinit code
-        LOGGER.info("HELLO FROM PREINIT");
+        LOGGER.info("PeepoMod - Pre-initialization phase");
         LOGGER.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());
     }
 
@@ -58,7 +63,7 @@ public class PeepoMain {
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event) {
         // do something when the server starts
-        LOGGER.info("HELLO from server starting");
+        LOGGER.info("Peepo Mod - Starting phase");
     }
 
     // You can use EventBusSubscriber to automatically subscribe events on the contained class (this is subscribing to the MOD
@@ -68,7 +73,7 @@ public class PeepoMain {
         @SubscribeEvent
         public static void onBlocksRegistry(final RegistryEvent.Register<Block> blockRegistryEvent) {
             // register a new block here
-            LOGGER.info("HELLO from Register Block");
+            LOGGER.info("Peepo Mod - Block Registry");
         }
     }
 }
