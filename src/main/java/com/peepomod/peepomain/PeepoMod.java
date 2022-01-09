@@ -22,14 +22,14 @@ import java.util.stream.Collectors;
 /* To build: Gradle -> PeepoMain -> forgegradle runs -> runClient
  *
  */
-@Mod("PeepoMod")
-public class PeepoMain {
-    public static String MODID = "PeepoMod";
+@Mod("peepomod")
+public class PeepoMod {
+    public static String MODID = "peepomod";
 
     // Directly reference a log4j logger.
     private static final Logger LOGGER = LogManager.getLogger();
 
-    public PeepoMain() {
+    public PeepoMod() {
         // Register the setup method for modloading
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
         // Register the enqueueIMC method for modloading
