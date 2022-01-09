@@ -1,5 +1,7 @@
 package com.peepomod.peepomain;
 
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.MinecraftForge;
@@ -24,7 +26,13 @@ import java.util.stream.Collectors;
  */
 @Mod("peepomod")
 public class PeepoMod {
-    public static String MODID = "peepomod";
+    public static final String MODID = "peepomod";
+    public static final CreativeModeTab TAB_PEEPO_MOD = new CreativeModeTab(MODID) {
+        @Override
+        public ItemStack makeIcon() {
+            return new ItemStack(RegistryHandler.TEST_ITEM.get());
+        }
+    };
 
     // Directly reference a log4j logger.
     private static final Logger LOGGER = LogManager.getLogger();
@@ -39,12 +47,14 @@ public class PeepoMod {
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
+
+        //Registry events
+        RegistryHandler.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
     }
 
     private void setup(final FMLCommonSetupEvent event) {
         // some preinit code
         LOGGER.info("PeepoMod - Pre-initialization phase");
-        LOGGER.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event) {
@@ -66,14 +76,14 @@ public class PeepoMod {
         LOGGER.info("Peepo Mod - Starting phase");
     }
 
-    // You can use EventBusSubscriber to automatically subscribe events on the contained class (this is subscribing to the MOD
-    // Event bus for receiving Registry Events)
-    @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)
-    public static class RegistryEvents {
-        @SubscribeEvent
-        public static void onBlocksRegistry(final RegistryEvent.Register<Block> blockRegistryEvent) {
-            // register a new block here
-            LOGGER.info("Peepo Mod - Block Registry");
-        }
-    }
+//    // You can use EventBusSubscriber to automatically subscribe events on the contained class (this is subscribing to the MOD
+//    // Event bus for receiving Registry Events)
+//    @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)
+//    public static class RegistryEvents {
+//        @SubscribeEvent
+//        public static void onBlocksRegistry(final RegistryEvent.Register<Block> blockRegistryEvent) {
+//            // register a new block here
+//            LOGGER.info("Peepo Mod - Block Registry");
+//        }
+//    }
 }
